@@ -1,4 +1,6 @@
-import './App.css';
+import './styles/App.css';
+import Hero from './components/Home/Hero';
+import imagen from './assets/filtros_nuevos2.jpg';
 
 function App() {
   return (
@@ -18,10 +20,14 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <div>
-    <h1>Hola Mundo </h1>
-    <p>Este es mi E-commerce</p>
-    </div>
+    // <div>
+    // <h1 className="rojo">Hola Mundo </h1>
+    // <p>Este es mi E-commerce</p>
+    // </div>
+    <>
+    <Hero/>
+    <img src={imagen} alt="imagen" />
+    </>
   );
 }
 
