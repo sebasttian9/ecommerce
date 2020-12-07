@@ -1,6 +1,11 @@
 import './styles/App.css';
 import Hero from './components/Home/Hero';
-import imagen from './assets/filtros_nuevos2.jpg';
+import Navbar from './components/Navbar/Navbar';
+import imagen from './assets/gabtec-logo_135.gif';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+// Put any other imports below so that CSS from your
+// components takes precedence over default styles.
 
 function App() {
   return (
@@ -25,8 +30,10 @@ function App() {
     // <p>Este es mi E-commerce</p>
     // </div>
     <>
+    <Navbar src={imagen}/>
     <Hero/>
-    <img src={imagen} alt="imagen" />
+    {/* <img src={imagen} alt="imagen" /> */}
+    <button className="btn btn-primary">Primary</button>
     </>
   );
 }
