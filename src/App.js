@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import {useState, useEffect} from 'react';
 import Listado from './components/ListProdHome/listadoProdHome';
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 
@@ -40,17 +41,10 @@ function App() {
 
   return (
     <>
-      {/* {message} */}
         <Navbar src={imagen}/>
 
-        
-         <Listado/>
-         
-        {/* <Home/> */}
 
-      {/* <p>{nombre}</p>
-      <input name="btnCambiar" id="" className="btn btn-primary" onClick={() => setNombre('Seba')} type="button" value="Cambiar nombre" /> */}
-
+         <ItemDetailContainer/>
       
     </>
   );
