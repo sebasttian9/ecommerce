@@ -1,16 +1,33 @@
 import './styles/App.css';
-import Home from './components/Home/Hero';
 import Navbar from './components/Navbar/Navbar';
 import imagen from './assets/gabtec-logo_135.gif';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import {useState} from 'react';
-import {useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import Listado from './components/ListProdHome/listadoProdHome';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 
 function App() {
+
+  const [message, setmessage] = useState('');
+
+// Promesa 
+  // const task = new Promise((resolve, reject) =>{
+
+  //   if(true){
+  //     setTimeout(()=> {
+  //         resolve('aca estan los datos');
+  //     }, 3000);
+  //   }else{
+  //     reject('todo mal');
+  //   }
+  // })
+
+  // task
+  // .then(rta => setmessage(rta))
+  // .catch(error => console.log(error))
+
 
   const [nombre, setNombre] = useState('lalala');
   useEffect(() => {
@@ -23,11 +40,12 @@ function App() {
 
   return (
     <>
-      
+      {/* {message} */}
         <Navbar src={imagen}/>
 
         
          <Listado/>
+         
         {/* <Home/> */}
 
       {/* <p>{nombre}</p>
