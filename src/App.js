@@ -1,50 +1,36 @@
 import './styles/App.css';
 import Navbar from './components/Navbar/Navbar';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import imagen from './assets/gabtec-logo_135.gif';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import {useState, useEffect} from 'react';
-import Listado from './components/ListProdHome/listadoProdHome';
+import Listado from './components/ListProdHome/ListadoProdHome';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 
 function App() {
 
-  const [message, setmessage] = useState('');
-
-// Promesa 
-  // const task = new Promise((resolve, reject) =>{
-
-  //   if(true){
-  //     setTimeout(()=> {
-  //         resolve('aca estan los datos');
-  //     }, 3000);
-  //   }else{
-  //     reject('todo mal');
-  //   }
-  // })
-
-  // task
-  // .then(rta => setmessage(rta))
-  // .catch(error => console.log(error))
-
-
-  const [nombre, setNombre] = useState('lalala');
-  useEffect(() => {
-    console.log('holaa');
-    //efecto
-    // return () => {
-    //   cleanup
-    // }
-  }, [nombre]);
-
   return (
     <>
-        <Navbar src={imagen}/>
-
-
-         <ItemDetailContainer/>
+    <BrowserRouter>
+    <Navbar src={imagen}/>
+      <Switch>
+          <Route exact path="/">
+            <Listado titulo="Productos destacados" />
+          </Route>
+          <Route exact path="/category/:id">
+            <Listado titulo="Categoria" />
+          </Route>          
+          <Route path="/detail/:idProducto?"> {/* /:id -> (Parametro obligatorio), /:id? -> opcional */}
+            <ItemDetailContainer/>
+          </Route>
+          <Route path="*">
+            <Listado/>
+          </Route>          
+      </Switch>
+    </BrowserRouter>
       
     </>
   );

@@ -1,10 +1,10 @@
-import ItemList from '../itemList/itemList';
+import ItemList from '../itemList/ItemList';
 
-const Listado = () =>{
+const Listado = ({titulo}) =>{
     return(
 
         <>
-                 <h3 className="prodDestacados">Productos destacados</h3>
+                 <h3 className="prodDestacados">{titulo}</h3>
                  <ItemList></ItemList>                
         </>
     );

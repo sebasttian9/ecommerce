@@ -1,9 +1,20 @@
 import img from '../../assets/26000-2A.jpg';
 import './itemDetail.css';
+import { useEffect } from 'react';
+import {Link, useParams} from 'react-router-dom';
 
 const ItemDetail = (prod) =>{
 
-       console.log(prod.item[0]);
+       console.log(prod.item);
+
+
+        // recibir parametro enviado por la ruta
+       const {id} = useParams();
+
+       useEffect(() => {
+        console.log(id);
+
+       }, [id]);
 
     return (
 
@@ -19,21 +30,25 @@ const ItemDetail = (prod) =>{
                 <div className="col-4">
                     <div className="row">
                         <div className="col-12 text-center mt-5">
-                            <span className="titulo">{prod.item[0].nombre} </span>
+                            <span className="titulo">{prod.item.titulo} </span>
 
                         </div>                        
                         <div className="col-12 mt-4">
-                            <span className="precio">Precio: <span className="precioValor">$ {prod.item[0].precio}</span> </span>
+                            <span className="precio">Precio: <span className="precioValor">$ {prod.item.precio}</span> </span>
 
                         </div>
                         <div className="col-12 mt-3">
                             <span className="descripcion">Descripcion : 
                                 <span className="descripcionTexto">
-                                    {prod.item[0].descripcion}
+                                    {prod.item.descripcion}
                                 </span>
                             </span>
 
                         </div>
+                        <div className="col-12 mt-3">
+                            <button className="btn btn-success">Agregar al Carro</button>
+                            <Link to={'/'} className="btn btn-danger ml-3">Volver</Link>
+                        </div>                        
 
                     </div>
 

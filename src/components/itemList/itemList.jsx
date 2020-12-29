@@ -1,8 +1,13 @@
 import {useState, useEffect} from 'react';
-import Producto from '../Product/producto';
+import Producto from '../Product/Producto';
+import { useParams } from 'react-router-dom';
 
 
 const ItemList = () =>{
+
+    // recibo el parametro
+
+    const {id} = useParams();
 
 
     const [items, setItems] = useState([]);
@@ -12,65 +17,74 @@ const ItemList = () =>{
 
         {
             id: 1,
-            titulo: 'Producto 1',
+            titulo: 'Bujia',
+            category: '1',
             descripcion: '',
-            precio: 500
+            precio: 1100
         },
         {
             id: 2,
-            titulo: 'Producto 2',
+            titulo: 'bujia 2',
+            category: '1',
             descripcion: '',
-            precio: 500
+            precio: 600
         },
         {
             id: 3,
-            titulo: 'Producto 3',
+            titulo: 'Amortiguador',
+            category: '2',            
             descripcion: '',
-            precio: 500
+            precio: 900
         },
         {
             id: 4,
-            titulo: 'Producto 4',
+            titulo: 'Axial',
+            category: '3',            
             descripcion: '',
-            precio: 500
+            precio: 800
         },
         {
             id: 5,
-            titulo: 'Producto 5',
+            titulo: 'Axial 2',
+            category: '3',            
             descripcion: '',
             precio: 1000
         }
     ];
 
     const getProducts = new Promise((resolve, reject)=>{
-        setTimeout(()=>{
-            resolve(products);
-        },2000)
-    } )
+        setTimeout(()=>{ resolve(products); },2000);
+    } );
 
-    useEffect(() => {
-        getProducts.then(rta => setItems(rta));
-    }, []);    
+
+     const llamarProductos = () => {
+        getProducts.then((resp) =>{
+            const productosCategoria = resp.filter(produc => produc.category === id);
+            if(productosCategoria.length>0){
+                setItems(productosCategoria);
+            }else{
+                setItems(resp);
+            }
+        });
+     }
+
+    useEffect(() => { setItems([]); llamarProductos();} , [id]);    
     
-    useEffect (()=>{
-
-        console.log(items);
-        items.map(item => console.log(item));
-
-    }, [items])
 
     return (
 
         <>
                          <div className="row col-12">
                      {
-                         items.length ?
+                         
+                         items.length > 0 ?
                          
                             items.map((item, index)=> (
    
                             <Producto 
                             key={item.id} 
-                            nombre={item.nombre} 
+                            id={item.id}
+                            nombre={item.titulo} 
                             precio={item.precio} 
                             stock='10'/>
                             

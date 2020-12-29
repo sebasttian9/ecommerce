@@ -2,14 +2,17 @@ import './producto.css';
 import prod from '../../assets/26000-2A.jpg';
 import ItemCount from '../ItemCount/ItemCount';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 
-function Producto({nombre,precio,stock}){
+function Producto({id,nombre,precio,stock}){
+
+    //console.log(id);
 
     const [count, setCount] = useState(1);
 
     const add = () => {
 
-        console.log(stock,count);
+        //console.log(stock,count);
 
             if(count<stock){
                 setCount(count + 1);
@@ -38,7 +41,7 @@ function Producto({nombre,precio,stock}){
         <>
            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
             <div className="card anchoCard" >
-                <img className="card-img-top" src={prod} alt="Card image cap"/>
+                <Link to={`/detail/${id}`}><img className="card-img-top" src={prod} alt="Card image cap"/></Link>
                 <div className="card-body">
                 <h5 className="card-title">{nombre}  ${precio}</h5>
                     <p className="card-text">Stock : {stock}</p>
