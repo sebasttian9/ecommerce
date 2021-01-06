@@ -7,6 +7,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import {useState, useEffect} from 'react';
 import Listado from './components/ListProdHome/ListadoProdHome';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
+import Cart from './components/Cart/Cart';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 
@@ -26,6 +27,9 @@ function App() {
           <Route path="/detail/:idProducto?"> {/* /:id -> (Parametro obligatorio), /:id? -> opcional */}
             <ItemDetailContainer/>
           </Route>
+          <Route path="/cart">
+            <Cart/>
+          </Route>          
           <Route path="*">
             <Listado/>
           </Route>          

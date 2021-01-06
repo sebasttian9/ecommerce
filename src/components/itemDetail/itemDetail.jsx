@@ -2,10 +2,20 @@ import img from '../../assets/26000-2A.jpg';
 import './itemDetail.css';
 import { useEffect } from 'react';
 import {Link, useParams} from 'react-router-dom';
+import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const ItemDetail = (prod) =>{
 
-       console.log(prod.item);
+       //console.log(prod.item);
+        
+       const history = useHistory();
+
+       function activateLasers() {
+           alert('Producto Agregardo');
+         history.push("/cart");
+       }
+
 
 
         // recibir parametro enviado por la ruta
@@ -17,6 +27,8 @@ const ItemDetail = (prod) =>{
        }, [id]);
 
     return (
+
+
 
         // Detalle del producto (ficha de presentacion)
         <>
@@ -46,7 +58,7 @@ const ItemDetail = (prod) =>{
 
                         </div>
                         <div className="col-12 mt-3">
-                            <button className="btn btn-success">Agregar al Carro</button>
+                            <button className="btn btn-success" onClick={activateLasers}>Agregar al Carro</button>
                             <Link to={'/'} className="btn btn-danger ml-3">Volver</Link>
                         </div>                        
 
