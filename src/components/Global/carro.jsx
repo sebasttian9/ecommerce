@@ -1,11 +1,33 @@
 import LogoCarro from '../../assets/logo-carro.png';
+import Widgetcart from '../widgetCart/WidgetCart';
+import { useState, useContext } from 'react';
+import './Carro.css';
+import {Store} from '../../store';
+
 
 function Carro(){
+
+    const [data, setData] = useContext(Store);
+
+    const [verWidgetCar, setVerWidgetCar] = useState(false);
+
+    const openWidgetCard = () => {
+
+        setVerWidgetCar(!verWidgetCar);
+
+    }
 
     return(
 
         <>
-            <a href="#"><img src={LogoCarro} width="30" alt="LogoCarritoCompras"/></a>
+            <div>
+                <div className="contador">
+                    <span>{data.cantidad}</span>
+                </div>
+                <a href="#"><img src={LogoCarro} width="30" onClick={openWidgetCard} alt="LogoCarritoCompras"/></a>
+            </div>
+            <Widgetcart show={verWidgetCar} action={openWidgetCard} />
+
         </>
     );
 }

@@ -1,20 +1,94 @@
 import img from '../../assets/26000-2A.jpg';
 import './itemDetail.css';
-import { useEffect } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {Link, useParams} from 'react-router-dom';
-import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import ItemCount from '../ItemCount/ItemCount';
+import {Store} from '../../store';
+import { isNumeric } from 'jquery';
 
 const ItemDetail = (prod) =>{
 
+    // Context 
+    const [data, setData] = useContext(Store);
+
+
+    // estado    
+    const [count, setCount] = useState(1);
+
+    const add = () => {
+
+        //console.log(stock,count);
+
+            if(count<prod.item.stock){
+                setCount(count + 1);
+            }else{
+                alert('Stock Insuficiente!');
+            }
+    }
+
+    const less = () => {
+
+        if(count>0){
+
+            setCount(count - 1);
+
+        }
+    }
+
+    // function para agregar al carro
+    const CarroAdd = () => { 
+
+        //valido si existe el producto
+        if(existeProd()){
+            //function para buscar el index del item repetido del carro
+            const encontro = (item) => item.item.id == prod.item.id;
+            const indiceItem = data.items.findIndex(encontro);
+            //modifico el atributo cantidad en carro del item repetido a agregar
+            data.items[indiceItem].item.cantidadEnCarro = data.items[indiceItem].item.cantidadEnCarro + count;
+
+            //seteo cantidad general y piso el array items para actualizar las unidades del producto agregado
+            setData({
+                ...data,
+                cantidad: data.cantidad + count,
+                items: data.items
+            }); 
+
+        }else{
+
+            // si no existe, agrego cantidad inicial del producto agregado al carro
+            prod.item.cantidadEnCarro = count;     
+
+            // seteo el valor de la cantidad y agrego el item al carro
+            setData({
+                ...data,
+                cantidad: data.cantidad + count,
+                items: [...data.items,prod]
+            });            
+            
+        }
+    } 
+    
+    // function para saber si existe el producto en el carro
+    const existeProd = () => {
+        const buscaProd = data.items.find(item => item.item.id == prod.item.id);
+        if(buscaProd){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    //console.log(data);
+
        //console.log(prod.item);
         
-       const history = useHistory();
+       //const history = useHistory();
 
-       function activateLasers() {
-           alert('Producto Agregardo');
-         history.push("/cart");
-       }
+    //    function activateLasers() {
+    //        alert('Producto Agregardo');
+    //      history.push("/cart");
+    //    }
 
 
 
@@ -58,10 +132,17 @@ const ItemDetail = (prod) =>{
 
                         </div>
                         <div className="col-12 mt-3">
-                            <button className="btn btn-success" onClick={activateLasers}>Agregar al Carro</button>
-                            <Link to={'/'} className="btn btn-danger ml-3">Volver</Link>
+                            <ItemCount
+                            count={count}
+                            add={add}
+                            less={less}
+                            />
+                            <button className="btn btn-outline-primary btn-sm btn-block" onClick={CarroAdd}>Agregar al Carro</button>
+                            
                         </div>                        
-
+                        <div className="col-12 mt-3">
+                            <Link to={'/'} className="btn btn-outline-danger btn-sm btn-block">Volver</Link>
+                        </div>
                     </div>
 
                 </div>

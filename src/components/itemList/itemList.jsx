@@ -11,6 +11,7 @@ const ItemList = () =>{
 
 
     const [items, setItems] = useState([]);
+    //const [idVar, setidVar] = useState(0);
 
     // constante es una API
     const  products = [
@@ -59,6 +60,12 @@ const ItemList = () =>{
 
      const llamarProductos = () => {
         getProducts.then((resp) =>{
+
+            // if(id){
+            //     const id2 = id.split('-');
+            //     setidVar(id2[0]);
+            // }
+            //console.log(id2,'id2');
             const productosCategoria = resp.filter(produc => produc.category === id);
             if(productosCategoria.length>0){
                 setItems(productosCategoria);

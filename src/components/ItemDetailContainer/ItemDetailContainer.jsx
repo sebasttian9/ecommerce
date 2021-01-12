@@ -19,35 +19,40 @@ const ItemDetailContainer = () => {
             titulo: 'Bujia',
             category: '1',
             descripcion: 'Resistencia normal',
-            precio: 1100
+            precio: 1100,
+            stock: 10
         },
         {
             id: 2,
             titulo: 'bujia 2',
             category: '1',
             descripcion: 'Resistencia premiun',
-            precio: 600
+            precio: 600,
+            stock: 20
         },
         {
             id: 3,
             titulo: 'Amortiguador',
             category: '2',            
             descripcion: 'Delantero para chevrolet luv',
-            precio: 900
+            precio: 900,
+            stock: 30
         },
         {
             id: 4,
             titulo: 'Axial',
             category: '3',            
             descripcion: 'Tren delantero 1',
-            precio: 800
+            precio: 800,
+            stock: 40
         },
         {
             id: 5,
             titulo: 'Axial 2',
             category: '3',            
             descripcion: 'Tren delantero 2',
-            precio: 1000
+            precio: 1000,
+            stock: 50
         }
     ];
 
@@ -63,7 +68,7 @@ const ItemDetailContainer = () => {
     // Utilizo el UseEffect para setear el estado prod
     useEffect(() => {
         setProd([]);
-        getProduct.then(rta => {setProd(rta); console.log(rta);});
+        getProduct.then(rta => {setProd(rta);});
         //console.log(prod,'despues del set');
         
     }, []);

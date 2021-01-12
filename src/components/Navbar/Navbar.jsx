@@ -32,7 +32,6 @@ function Navbar(imagen){
 
     const getAllCategoria = new Promise((resolve, reject)=>{
         resolve(categorias);
-        console.log(categorias, 'promise');
     });
 
 
@@ -40,7 +39,6 @@ function Navbar(imagen){
 
         getAllCategoria.then(resp =>{
             setCate(resp);
-            console.log(categorias, 'useeffecr');
         });
 
     },[]);
@@ -66,15 +64,10 @@ function Navbar(imagen){
                                 cate.map((item, index)=>(
 
                                     
-                                    <Link className="dropdown-item" to={`/category/${item.id}`}>{item.nombre}</Link>                                    
+                                    <Link key={item.id} className="dropdown-item" to={`/category/${item.id}`}>{item.nombre}</Link>      //+'-'+item.nombre                               
 
                                 ))
                             }
-                        {/* <a className="dropdown-item" href="#">Acc. Portalones</a>
-                        <a className="dropdown-item" href="#">Accesorios</a>
-                        <Link className="dropdown-item"  to={'/category/2'}>Amortiguadores</Link>
-                        <Link className="dropdown-item"  to={'/category/3'}>Axial</Link>
-                        <Link className="dropdown-item"  to={'/category/1'}>Bujias</Link> */}
                         </div>
                     </li>
 
