@@ -5,7 +5,6 @@ import {Link, useParams} from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import ItemCount from '../ItemCount/ItemCount';
 import {Store} from '../../store';
-import { isNumeric } from 'jquery';
 
 const ItemDetail = (prod) =>{
 

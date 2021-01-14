@@ -20,7 +20,7 @@ function Carro(){
     return(
 
         <>
-            <div>
+            <div className={`${data.cantidad > 0 ? 'd-block' : 'd-none'}`}>
                 <div className="contador">
                     <span>{data.cantidad}</span>
                 </div>

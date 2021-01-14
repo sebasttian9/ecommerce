@@ -1,10 +1,12 @@
 import './WidgetCart.css';
 import {Store} from '../../store';
 import {useContext} from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Widgetcart = ({show,action}) =>{
 
     const [data, setData] = useContext(Store);
+    const history = useHistory();
 
 
 
@@ -31,6 +33,13 @@ const Widgetcart = ({show,action}) =>{
         });
     }
 
+
+    const irCarro = () => {
+        
+        action();
+        history.push("/cart");
+    }    
+
     return (
         <>
             <div className={`widgetCart ${show ? 'open' : 'close' }`}>
@@ -51,8 +60,8 @@ const Widgetcart = ({show,action}) =>{
                             <th scope="col">accion</th>
                             </tr>
                         </thead>
-                        <tbody>                       
-                        {
+                        <tbody>
+                            {
                              data.items.length > 0 ?
                             data.items.map((item,index) => 
 
@@ -77,6 +86,11 @@ const Widgetcart = ({show,action}) =>{
                         {data.items.length > 0 ? <tr><td colSpan="4"><button onClick={() => eliminarTodos()} className="btn btn-outline-dark btn-sm btn-block">Limpiar carro</button></td></tr> : ''}
                         </tbody>
                         </table> 
+                    </div>
+                    <div className="row align-items-end">
+                                <div className="col-12">
+                                        <button onClick={() => irCarro()} className="btn btn-info float-rigth">ir al carro</button>
+                                </div>
                     </div>
                     
                 </div>

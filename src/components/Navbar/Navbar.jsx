@@ -1,10 +1,12 @@
 import Carro from '../Global/carro';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext, unmountComponentAtNode } from 'react';
+import {Store} from '../../store';
 
 function Navbar(imagen){
 
     const [cate, setCate] = useState([]);
+    const [data,setData] = useContext(Store);
 
     const categorias = [
         {
@@ -42,6 +44,16 @@ function Navbar(imagen){
         });
 
     },[]);
+
+
+    // const CantEnCarro = () => {
+
+    //     if(data.cantidad==0){
+    //         unmountComponentAtNode(document.getElementById('idcarrito'));
+    //     }
+    // }
+
+    //CantEnCarro();
 
     return(
 

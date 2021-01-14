@@ -19,6 +19,7 @@ function App() {
     cantidad: 0,
   });
 
+
   return (
     <>
     <Store.Provider value={[data,setData]}>
