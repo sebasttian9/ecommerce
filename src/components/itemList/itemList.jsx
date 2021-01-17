@@ -1,81 +1,128 @@
 import {useState, useEffect} from 'react';
 import Producto from '../Product/Producto';
 import { useParams } from 'react-router-dom';
-
+import firestore, { getFirestore } from '../../firebase';
 
 const ItemList = () =>{
 
     // recibo el parametro
 
     const {id} = useParams();
-
-
+    
     const [items, setItems] = useState([]);
-    //const [idVar, setidVar] = useState(0);
+
+    //declaro variable para aaceder a bd 
+    const db = getFirestore();
+
+    // Obtengo todos los productos si no pasan id de categoria
+    const getProductsFromDB = () => {
+        
+        
+        db.collection('productos').where("destacado", "==", true).get()
+        .then(docs =>{
+            let arr = [];
+            docs.forEach(doc => {
+                arr.push({id: doc.id, data: doc.data()});
+                // console.log(doc.id);
+                // console.log(doc.data());
+            })
+
+            setItems(arr);
+        })
+        .catch(e => console.log(e));
+    }
+
+
+    // Obtengo los productos segun la categoria pasada por url
+    const getProductsFromDBCategory = () => {
+        
+        
+        db.collection('productos').where("categoryName", "==", id).get()
+        .then(docs =>{
+            let arr = [];
+            docs.forEach(doc => {
+                arr.push({id: doc.id, data: doc.data()});
+                // console.log(doc.id);
+                // console.log(doc.data());
+            })
+
+            setItems(arr);
+        })
+        .catch(e => console.log(e));
+    }    
+
+    useEffect(() => {
+        id ? getProductsFromDBCategory() : getProductsFromDB()
+
+            console.log(items);
+        
+    }, [id]);   
+
+
+
+
+
+
+    
 
     // constante es una API
-    const  products = [
+    // const  products = [
 
-        {
-            id: 1,
-            titulo: 'Bujia',
-            category: '1',
-            descripcion: '',
-            precio: 1100
-        },
-        {
-            id: 2,
-            titulo: 'bujia 2',
-            category: '1',
-            descripcion: '',
-            precio: 600
-        },
-        {
-            id: 3,
-            titulo: 'Amortiguador',
-            category: '2',            
-            descripcion: '',
-            precio: 900
-        },
-        {
-            id: 4,
-            titulo: 'Axial',
-            category: '3',            
-            descripcion: '',
-            precio: 800
-        },
-        {
-            id: 5,
-            titulo: 'Axial 2',
-            category: '3',            
-            descripcion: '',
-            precio: 1000
-        }
-    ];
+    //     {
+    //         id: 1,
+    //         titulo: 'Bujia',
+    //         category: '1',
+    //         descripcion: '',
+    //         precio: 1100
+    //     },
+    //     {
+    //         id: 2,
+    //         titulo: 'bujia 2',
+    //         category: '1',
+    //         descripcion: '',
+    //         precio: 600
+    //     },
+    //     {
+    //         id: 3,
+    //         titulo: 'Amortiguador',
+    //         category: '2',            
+    //         descripcion: '',
+    //         precio: 900
+    //     },
+    //     {
+    //         id: 4,
+    //         titulo: 'Axial',
+    //         category: '3',            
+    //         descripcion: '',
+    //         precio: 800
+    //     },
+    //     {
+    //         id: 5,
+    //         titulo: 'Axial 2',
+    //         category: '3',            
+    //         descripcion: '',
+    //         precio: 1000
+    //     }
+    // ];
 
-    const getProducts = new Promise((resolve, reject)=>{
-        setTimeout(()=>{ resolve(products); },2000);
-    } );
+    // const getProducts = new Promise((resolve, reject)=>{
+    //     setTimeout(()=>{ resolve(products); },2000);
+    // } );
 
 
-     const llamarProductos = () => {
-        getProducts.then((resp) =>{
+    //  const llamarProductos = () => {
+    //     getProducts.then((resp) =>{
 
-            // if(id){
-            //     const id2 = id.split('-');
-            //     setidVar(id2[0]);
-            // }
-            //console.log(id2,'id2');
-            const productosCategoria = resp.filter(produc => produc.category === id);
-            if(productosCategoria.length>0){
-                setItems(productosCategoria);
-            }else{
-                setItems(resp);
-            }
-        });
-     }
+    //         const productosCategoria = resp.filter(produc => produc.category === id);
+    //         if(productosCategoria.length>0){
+    //             setItems(productosCategoria);
+    //         }else{
+    //             setItems(resp);
+    //         }
+    //     });
+    //  }
 
-    useEffect(() => { setItems([]); llamarProductos();} , [id]);    
+    // useEffect(() => { setItems([]); llamarProductos();} , [id]);    
     
 
     return (
@@ -83,7 +130,11 @@ const ItemList = () =>{
         <>
                          <div className="row col-12">
                      {
+                         items.length == 0 ?
                          
+                         <h5 className="col-12 text-center mt-5" >No existen productos para esta categoria</h5> 
+                           :
+                                              
                          items.length > 0 ?
                          
                             items.map((item, index)=> (
@@ -91,13 +142,13 @@ const ItemList = () =>{
                             <Producto 
                             key={item.id} 
                             id={item.id}
-                            nombre={item.titulo} 
-                            precio={item.precio} 
-                            stock='10'/>
+                            nombre={item.data.titulo} 
+                            precio={item.data.precio} 
+                            stock={item.data.stock}/>
                             
                             ))
                          :
-                         <h5 className="col-12 text-center mt-5" >Cargando Items...</h5>
+                         <h5 className="col-12 text-center mt-5" >cargando items...</h5>
                      }
 
                     {/* <Producto nombre='Bujia' precio='500' stock='10'/>

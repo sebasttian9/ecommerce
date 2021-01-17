@@ -1,47 +1,69 @@
 import Carro from '../Global/carro';
 import { Link } from 'react-router-dom';
-import { useEffect, useState, useContext, unmountComponentAtNode } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {Store} from '../../store';
+import firestore, {getFirestore} from '../../firebase';
 
 function Navbar(imagen){
 
     const [cate, setCate] = useState([]);
     const [data,setData] = useContext(Store);
+    const db = getFirestore();
 
-    const categorias = [
-        {
-            id : 1,
-            nombre : 'Bujias'
-        },
-        {
-            id : 2,
-            nombre : 'Amortiguadores'
-        },
-        {
-            id : 3,
-            nombre : 'Axial'
-        },
-        {
-            id : 4,
-            nombre : 'Accesorios'
-        },
-        {
-            id : 5,
-            nombre : 'Acc. Portalones'
-        }          
-];
+//     const categorias = [
+//         {
+//             id : 1,
+//             nombre : 'Bujias'
+//         },
+//         {
+//             id : 2,
+//             nombre : 'Amortiguadores'
+//         },
+//         {
+//             id : 3,
+//             nombre : 'Axial'
+//         },
+//         {
+//             id : 4,
+//             nombre : 'Accesorios'
+//         },
+//         {
+//             id : 5,
+//             nombre : 'Acc. Portalones'
+//         }          
+// ];
 
+    const getCategoriasFromDB = () =>{
 
-    const getAllCategoria = new Promise((resolve, reject)=>{
-        resolve(categorias);
-    });
+        db.collection('categorias').orderBy("nombre", "asc").get()
+        
+        .then(docs => {
+
+            let arra = [];
+            docs.forEach(doc =>{
+                arra.push({id: doc.id, data: doc.data()})
+                console.log(doc.id);
+                console.log(doc.data())
+            })
+
+            setCate(arra);
+
+        })
+        .catch(e => console.log(e))
+    }
+
+    // const getAllCategoria = new Promise((resolve, reject)=>{
+    //     resolve(categorias);
+    // });
 
 
     useEffect(()=>{
 
-        getAllCategoria.then(resp =>{
-            setCate(resp);
-        });
+           getCategoriasFromDB(); 
+
+        // getAllCategoria.then(resp =>{
+        //     setCate(resp);
+        // });
 
     },[]);
 
@@ -76,7 +98,7 @@ function Navbar(imagen){
                                 cate.map((item, index)=>(
 
                                     
-                                    <Link key={item.id} className="dropdown-item" to={`/category/${item.id}`}>{item.nombre}</Link>      //+'-'+item.nombre                               
+                                    <Link key={item.id} className="dropdown-item" to={`/category/${item.data.nombre}`}>{item.data.nombre}</Link>      //+'-'+item.nombre                               
 
                                 ))
                             }

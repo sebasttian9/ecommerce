@@ -4,18 +4,14 @@ import {useState} from 'react';
 
 const Listado = ({titulo}) =>{
 
-    // const [title, setTitle] = useState(titulo);
+    const {id} = useParams();
 
-    // const {id} = useParams();
-    // if(id){
-    //     //console.log(id,'id listado');
-    //     const id2 = id.split('-');
-    //     setTitle(id2[1]);
-    // }
+    let titulo2 = id ? id : titulo;
+
     return(
 
         <>
-                 <h3 className="prodDestacados">{titulo}</h3>
+                 <h3 className="prodDestacados">{titulo2}</h3>
                  <ItemList></ItemList>                
         </>
     );
