@@ -82,24 +82,24 @@ const Checkout = () => {
                             
                                 <form onSubmit={handleSubmitForm}>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" name="nombre" value={formData.nombre} onChange={handleChangeInput} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre"/>
+                                        <input type="text" required className="form-control" name="nombre" value={formData.nombre} onChange={handleChangeInput} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre"/>
                                         {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" name="apellido" value={formData.apellido} onChange={handleChangeInput} id="exampleInputPassword1" placeholder="Apellido"/>
+                                        <input type="text" required className="form-control" name="apellido" value={formData.apellido} onChange={handleChangeInput} id="exampleInputPassword1" placeholder="Apellido"/>
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" name="email" value={formData.email} onChange={handleChangeInput} id="exampleInputPassword1" placeholder="Email"/>
+                                        <input type="text" required className="form-control" name="email" value={formData.email} onChange={handleChangeInput} id="exampleInputPassword1" placeholder="Email"/>
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" name="tel" value={formData.tel} onChange={handleChangeInput} id="exampleInputPassword1" placeholder="Telefono"/>
+                                        <input type="text" required className="form-control" name="tel" value={formData.tel} onChange={handleChangeInput} id="exampleInputPassword1" placeholder="Telefono"/>
                                     </div>                                                        
                                     {/* <div className="form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
                                         <label className="form-check-label" for="exampleCheck1">Check me out</label>
                                     </div>
                                     <button type="submit" className="btn btn-primary">Submit</button> */}
-                                    <button type="submit" className="btn btn-secondary btn-sm btn-block">Pagar</button>
+                                    <button disabled={[formData.nombre, formData.apellido, formData.email, formData.tel].includes('')} type="submit" className="btn btn-secondary btn-sm btn-block">Pagar</button>
                                 </form>
                                 :
                                 <p>Compra exitosa, numero de seguimiento {compraId}</p>

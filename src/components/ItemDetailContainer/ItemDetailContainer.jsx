@@ -70,14 +70,18 @@ const ItemDetailContainer = () => {
     // Utilizo el UseEffect para setear el estado prod
     useEffect(() => {
 
+        console.log('antes de buscar',prod);
+
             db.collection('productos').doc(idProducto).get()
             .then(doc => {
                 if(doc.exists){
                     console.log(doc.data())
                 }
                 setProd(doc.data());
+                
             })
-            .catch(e => console.log(e))
+            .catch(e => console.log(e));
+            console.log('despues de buscar',prod);
         
     }, []);
 

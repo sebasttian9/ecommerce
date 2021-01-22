@@ -8,6 +8,8 @@ import {Store} from '../../store';
 
 const ItemDetail = (prod) =>{
 
+    console.log('producto por prod',prod);
+
     // Context 
     const [data, setData] = useContext(Store);
 
