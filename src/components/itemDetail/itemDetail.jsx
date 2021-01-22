@@ -1,4 +1,3 @@
-import img from '../../assets/26000-2A.jpg';
 import './itemDetail.css';
 import { useEffect, useState, useContext } from 'react';
 import {Link, useParams} from 'react-router-dom';
@@ -111,7 +110,7 @@ const ItemDetail = (prod) =>{
         <div className="container">
             <div className="row mt-4">
                 <div className="col-8 text-center">
-                    <img src={img} width="500" />
+                    <img src={`../../../images/${prod.item.img}`} width="500" />
 
                 </div>
                 <div className="col-4">

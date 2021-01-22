@@ -144,7 +144,8 @@ const ItemList = () =>{
                             id={item.id}
                             nombre={item.data.titulo} 
                             precio={item.data.precio} 
-                            stock={item.data.stock}/>
+                            stock={item.data.stock}
+                            img={item.data.img}/>
                             
                             ))
                          :

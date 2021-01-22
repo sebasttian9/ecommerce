@@ -42,8 +42,8 @@ function Navbar(imagen){
             let arra = [];
             docs.forEach(doc =>{
                 arra.push({id: doc.id, data: doc.data()})
-                console.log(doc.id);
-                console.log(doc.data())
+                //console.log(doc.id);
+                //console.log(doc.data())
             })
 
             setCate(arra);

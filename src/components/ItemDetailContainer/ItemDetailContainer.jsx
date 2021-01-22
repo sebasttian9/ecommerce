@@ -76,14 +76,21 @@ const ItemDetailContainer = () => {
             .then(doc => {
                 if(doc.exists){
                     console.log(doc.data())
+                    setProd(doc.data());
+                }else{
+                    setProd(0);
+                    console.log('no existe el producto', prod);
                 }
-                setProd(doc.data());
+                
                 
             })
             .catch(e => console.log(e));
             console.log('despues de buscar',prod);
         
     }, []);
+
+
+    console.log(typeof(prod),'tipo de prod');
 
     return (
         <>
