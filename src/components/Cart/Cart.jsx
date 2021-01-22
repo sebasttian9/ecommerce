@@ -39,6 +39,7 @@ const Cart = () =>{
             });
         }
 
+
         return total;
 
     }
@@ -92,7 +93,14 @@ const Cart = () =>{
                 <span className="float-right ml-2" style={{color:'red'}}> {totalCarro(data)}</span><span className="float-right" style={{color:'black'}}>Total Carro:</span>
                 </div>
             </div>
-                
+            {
+                    data.items.length > 0 ? 
+            <div className="row">
+                <div className="col-12">
+                <Link to={'/checkout'} className="btn btn-info">Finalizar Compra!</Link>
+                </div>
+            </div> : ''
+            }                
         </div>
         
 

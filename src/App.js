@@ -9,6 +9,7 @@ import Listado from './components/ListProdHome/ListadoProdHome';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import Cart from './components/Cart/Cart';
 import {Store} from './store';
+import Checkout from './components/checkout/Checkout';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 
@@ -37,7 +38,10 @@ function App() {
             </Route>
             <Route path="/cart">
               <Cart/>
-            </Route>          
+            </Route>  
+            <Route path="/checkout">
+              <Checkout/>
+            </Route>         
             <Route path="*">
               <Listado/>
             </Route>          
